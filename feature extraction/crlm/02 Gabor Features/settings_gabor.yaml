@@ -1,0 +1,8 @@
+featureClass:
+    firstorder: ['10Percentile', '90Percentile', 'Energy', 'Entropy',
+                 'InterquartileRange', 'Kurtosis', 'Maximum', 'MeanAbsoluteDeviation',
+                 'Mean', 'Median', 'Minimum', 'Range', 'RobustMeanAbsoluteDeviation',
+                 'RootMeanSquared', 'Skewness', 'Uniformity', 'Variance']
+
+setting:
+    binWidth: 1
