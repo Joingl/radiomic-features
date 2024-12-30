@@ -1,0 +1,1 @@
+This directory holds the segmentation files from the CRLM dataset in the original DICOM format.

@@ -1,0 +1,1 @@
+This directory holds the scan files with the largest cross-section from the CTP4R dataset in numpy format.
