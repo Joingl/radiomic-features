@@ -67,7 +67,7 @@ def move_scans_and_rois_crlm():
 
 
 def main():
-    #move_scans_and_rois_ctp4r()
+    move_scans_and_rois_ctp4r()
     move_scans_and_rois_crlm()
 
 main()

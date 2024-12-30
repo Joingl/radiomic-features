@@ -55,8 +55,6 @@ def compute_AUC(df):
                 partial_res_list = compute_AUC_for_all_features(df, tissue_classes[c1], tissue_classes[c2])
                 results[f'{tissue_names[c1]} vs. {tissue_names[c2]}'] = partial_res_list
 
-
-    #results.to_csv('PRAUC discr power.csv', index=False)
     results.to_csv('CSVs/AUC discr power.csv', index=False)
 
 def compute_AUC_ranking():
