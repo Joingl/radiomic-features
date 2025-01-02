@@ -1,9 +1,8 @@
 import os
 import shutil
 
-#Insert paths where the downloaded data is stored
-path_ctp4r = 'D:/Radiomics Data/CT-Phantom4Radiomics/manifest-1681918831927/CT-Phantom4Radiomics/SPHNQA4IQI/'
-path_crlm = 'D:/Radiomics Data/CRLM/manifest-1669817128730/Colorectal-Liver-Metastases/'
+path_ctp4r = '' # SPECIFY PATH TO DOWNLOADED CTP4R DATA HERE
+path_crlm = '' #  SPECIFY PATH TO DOWNLOADED CRLM DATA HERE
 
 def move_scans_and_rois_ctp4r():
     path_out_scan_ctp4r = 'ctp4r/01 scan/'  # Path where scans will be stored
