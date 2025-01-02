@@ -29,7 +29,6 @@ def move_scans_and_rois_ctp4r():
             print(name)
             shutil.copyfile(p2, path_out_seg_ctp4r + name)
 
-
 def move_scans_and_rois_crlm():
     path_out_scan_crlm = 'crlm/01 scan/'
     path_out_seg_crlm = 'crlm/02 seg/'
@@ -64,7 +63,6 @@ def move_scans_and_rois_crlm():
                 name = f'{series}-{f2}'
                 print(name)
                 shutil.copyfile(p2, path_out_seg_crlm + name)
-
 
 def main():
     move_scans_and_rois_ctp4r()

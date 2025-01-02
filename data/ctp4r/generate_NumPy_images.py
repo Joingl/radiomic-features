@@ -6,7 +6,7 @@ scan_path = '01 scan/'
 seg_path = '02 seg/'
 classes = ['n1', 'n2', 'c1', 'c2', 'hem', 'met']
 
-def generate_NumPy_images():
+def generate_numpy_ctp4r():
     scan_out_path = '01 scan numpy/'
     mask_out_path = '02 seg numpy/'
 
@@ -25,8 +25,3 @@ def generate_NumPy_images():
 
         numpy.save(scan_out_path + k + '.npy', scan)
         numpy.save(mask_out_path + v + '.npy', mask)
-
-def main():
-    generate_NumPy_images()
-
-main()

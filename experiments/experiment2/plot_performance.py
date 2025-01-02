@@ -146,6 +146,8 @@ def plot(type, eval_type):
 def main():
     type = ['Traditional Features', 'Gabor Features', 'Deep Features (ImageNet)', 'Deep Features (OrganAMNIST)']
 
-    plot(type, eval_type='val') #set eval_type = 'val' or 'test'
+    plot(type, eval_type='val')
+    plot(type, eval_type='test')
+
 
 main()

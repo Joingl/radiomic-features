@@ -11,7 +11,7 @@ classes = ['liv', 'rem', 'hep', 'por', 't01', 't02', 't03', 't04', 't05', 't06',
            't12', 't13', 't14', 't15', 't16', 't17', 't18', 't19', 't20', 't21', 't22', 't23', 't24', 't25',
            't26', 't27', 't28', 't29', 't30', 't31', 't32', 't33', 't34', 't35']
 
-def generate_NumPy_images():
+def generate_numpy_crlm():
     scan_out_path = '01 scan numpy/'
     mask_out_path = '02 seg numpy/'
 
@@ -30,8 +30,3 @@ def generate_NumPy_images():
 
         numpy.save(scan_out_path + k + '.npy', scan)
         numpy.save(mask_out_path + v + '.npy', mask)
-
-def main():
-    generate_NumPy_images()
-
-main()
