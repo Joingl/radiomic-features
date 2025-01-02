@@ -1,6 +1,6 @@
 # Stability & Accuracy of Radiomic Features
 
-## 1) Download and prepare data for feature extraction
+## 1) Download and prepare Data for Feature Extraction
 ### Download
 In a first step, the two datasets these experiments are based on must be downloaded.  
 Both datasets are publicly available on The Cancer Imaging Archive's website.
@@ -15,19 +15,19 @@ Specify the paths to the stored datasets in line 5 and 6 of the script and run i
 
 ### Conversion to NumPy Arrays
 Features will be extracted from NumPy arrays.  
-To convert the selected DICOM images to NumPy arrays use the script provided [here](https://github.com/Joingl/radiomic-features/blob/main/data/generate_NumPy_images.py).
+Convert the selected DICOM images to NumPy arrays using the script provided [here](https://github.com/Joingl/radiomic-features/blob/main/data/generate_NumPy_images.py).
 
 ## 2) Feature Extraction
 In step 2 all feature types are extracted from the NumPy arrays. Feature extraction must be performed on both the datasets.  
 To extract features from the CTP4R data run the script provided [here](https://github.com/Joingl/radiomic-features/blob/main/feature%20extraction/ctp4r/extract_features_ctp4r.py)   
 To extract features from the CRLM data run the script provided [here](https://github.com/Joingl/radiomic-features/blob/main/feature%20extraction/crlm/extract_features_crlm.py)  
 
-For Gabor feature extraction you need to have a working version of the pytorch gabor library installed.
+**For Gabor feature extraction you need to have a working version of the pytorch gabor library installed.**
 
 ## 3) Experiment 1
 In experiment 1 stability and discriminative power are measured and features are ranked considering both characteristics.  
 The metrics and the ranking of the features are computed by executing the scripts provided in the respective directories [here](https://github.com/Joingl/radiomic-features/tree/main/experiments/experiment1).  
-Additionally, scripts to generate plots to summarize the results can be found in the corresponding directories.  
+Additionally, code for generating plots to summarize the results can be found in the corresponding directories.  
 
 ## 4) Experiment 2
 In experiment 2 various machine learning models are trained, validated and tested on the CTP4R and the CRLM datasets.  
