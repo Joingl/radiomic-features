@@ -1,51 +1,46 @@
+import os
 import pandas
 import numpy
 import csv
 import json
-import os
 from PIL import Image
-import PIL
 from helper.crop_image import cropImageTo96x96
-import torch
 import torch.nn as nn
 import torchvision.models as models
+from torchvision.models import ResNet50_Weights
 from torchvision import transforms
 from torchvision.models.feature_extraction import create_feature_extractor
 
-f = open('../../../data/crlm/largest_cross_sections.json')
+f = open('../../data/crlm/largest_cross_sections.json')
 largest_cs = json.load(f)
 
 def write_header_to_csv(dict):
-    with open("CSVs/deep features CRLM MNIST.csv", "w", newline="") as f:
+    with open("CSVs/deep features CRLM ImageNet.csv", "w", newline="") as f:
         w = csv.DictWriter(f, dict.keys())
         w.writeheader()
 
 def add_row_to_csv(dict):
-    with open('CSVs/deep features CRLM MNIST.csv', "a", newline="") as f:
+    with open('CSVs/deep features CRLM ImageNet.csv', "a", newline="") as f:
         w = csv.DictWriter(f, dict.keys())
         w.writerow(dict)
 
-def normalizeMNIST(x): #Standard and correct way IMO.
+def normalizeImageNet(x):
     z = (x - x.min()) / (x.max() - x.min()) * 255
     return z
 
-def load_MNIST():
-    weights = 'resnet50_224_1.pt'
-    model = models.resnet50(weights=None)
-    num_ftrs = model.fc.in_features
-    model.fc = nn.Linear(num_ftrs, 11)
-    model.load_state_dict(torch.load(weights, weights_only=True, map_location=torch.device('cpu')))
+def load_ImageNet():
+    model = models.resnet50(weights='IMAGENET1K_V1')
     return model
 
-def extract_features_MNIST(img, model):
+def extract_features_ImageNet(img, model):
+    image_transforms = transforms.Compose([
+        transforms.Grayscale(num_output_channels=3)])
+    img = image_transforms(img)
 
-    data_transform = transforms.Compose( #Transforms as shown in code by MedMNIST: https://github.com/MedMNIST/experiments/blob/main/MedMNIST2D/train_and_eval_pytorch.py
-        [transforms.Grayscale(num_output_channels=3),
-         transforms.Resize((224, 224), interpolation=PIL.Image.NEAREST),
-         transforms.ToTensor(),
-         transforms.Normalize(mean=[.5], std=[.5])])
+    weights = ResNet50_Weights.IMAGENET1K_V1
+    weights_transform = weights.transforms()
+    img = weights_transform(img)
 
-    img = data_transform(img)
     img = img.unsqueeze(0)
 
     return_nodes = {'avgpool': 'average pooling layer'}
@@ -62,12 +57,12 @@ def extract_features_MNIST(img, model):
     return res
 
 def iterate():
-    scan_path = '../../../data/crlm/01 scan numpy/'
-    seg_path = '../../../data/crlm/02 seg numpy/'
+    scan_path = '../../data/crlm/01 scan numpy/'
+    seg_path = '../../data/crlm/02 seg numpy/'
     first = True
 
     #Load model:
-    mnist_model = load_MNIST()
+    imagenet_model = load_ImageNet()
 
     for k, v in largest_cs.items():
         print(k)
@@ -76,7 +71,7 @@ def iterate():
         scan = numpy.load(scan_path + k + '.npy')
         mask = numpy.load(seg_path + v + '.npy')
 
-        scan = normalizeMNIST(scan)
+        scan = normalizeImageNet(scan)
         scan = cropImageTo96x96(scan, mask)
         scan = scan.astype('float32')
 
@@ -85,7 +80,8 @@ def iterate():
         img.save('tmp.tiff')
         img = Image.open('tmp.tiff')
 
-        result = extract_features_MNIST(img, mnist_model)
+
+        result = extract_features_ImageNet(img, imagenet_model)
         result['scan_id'] = k
         result['series'] = k[:4]
         result['class'] = k[5:8]
@@ -109,13 +105,9 @@ def formatCSV(df, filename):
 
     df.to_csv(f'{filename} clean.csv', index=False)
 
-def main():
+def extract_features():
     iterate()
 
-    df = pandas.read_csv('CSVs/deep features CRLM MNIST.csv')
-    formatCSV(df, 'CSVs/deep features CRLM MNIST')
-    df = pandas.read_csv('CSVs/deep features CRLM MNIST clean.csv')
-    print(df.shape)
-
-main()
+    df = pandas.read_csv('CSVs/deep features CRLM ImageNet.csv')
+    formatCSV(df, 'CSVs/deep features CRLM ImageNet')
 

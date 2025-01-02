@@ -11,7 +11,7 @@ from torchvision.models import ResNet50_Weights
 from torchvision import transforms
 from torchvision.models.feature_extraction import create_feature_extractor
 
-f = open('../../../data/ctp4r/largest_cross_sections.json')
+f = open('../../data/ctp4r/largest_cross_sections.json')
 largest_cs = json.load(f)
 
 def write_header_to_csv(dict):
@@ -57,8 +57,8 @@ def extract_features_ImageNet(img, model):
     return res
 
 def iterate():
-    scan_path = '../../../data/ctp4r/01 scan numpy/'
-    seg_path = '../../../data/ctp4r/02 seg numpy/'
+    scan_path = '../../data/ctp4r/01 scan numpy/'
+    seg_path = '../../data/ctp4r/02 seg numpy/'
     first = True
 
     #Load model:
@@ -105,13 +105,8 @@ def formatCSV(df, filename):
 
     df.to_csv(f'{filename} clean.csv', index=False)
 
-def main():
+def extract_features():
     iterate()
 
     df = pandas.read_csv('CSVs/deep features CTP4R ImageNet.csv')
     formatCSV(df, 'CSVs/deep features CTP4R ImageNet')
-    df = pandas.read_csv('CSVs/deep features CTP4R ImageNet clean.csv')
-    print(df.shape)
-
-main()
-

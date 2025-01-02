@@ -142,7 +142,6 @@ def compute_AUC_per_feature_type(df):
     results['F'] = counts
     results = results.sort_values(by='Average AUC', ascending=False)
 
-    #print(results)
     results.to_csv('CSVs/AUC per feature.csv')
 
 def compute_score_per_feature_type(df):
@@ -168,11 +167,10 @@ def compute_score_per_feature_type(df):
     results['F'] = counts
     results = results.sort_values(by='Average Score', ascending=False)
 
-    print(results)
     results.to_csv('CSVs/combined score per feature.csv')
 
 def main():
-    df = pandas.read_csv('../../../feature extraction/ctp4r/02 Gabor Features/CSVs/gabor features CTP4R clean.csv')
+    df = pandas.read_csv('../../../feature extraction/ctp4r/CSVs/gabor features CTP4R clean.csv')
     compute_ICC(df)
     compute_AUC(df)
 

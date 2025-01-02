@@ -5,19 +5,19 @@ import pandas
 from radiomics import featureextractor
 import SimpleITK as sitk
 
-scan_path = '../../../data/crlm/01 scan numpy/'
-seg_path = '../../../data/crlm/02 seg numpy/'
+scan_path = '../../data/ctp4r/01 scan numpy/'
+seg_path = '../../data/ctp4r/02 seg numpy/'
 
-f = open('../../../data/crlm/largest_cross_sections.json')
+f = open('../../data/ctp4r/largest_cross_sections.json')
 largest_cs = json.load(f)
 
 def write_header_to_CSV(dict):
-    with open("CSVs/traditional features CRLM.csv", "w", newline="") as f:
+    with open("CSVs/traditional features CTP4R.csv", "w", newline="") as f:
         w = csv.DictWriter(f, dict.keys())
         w.writeheader()
 
 def add_row_to_CSV(dict):
-    with open("CSVs/traditional features CRLM.csv", "a", newline="") as f:
+    with open("CSVs/traditional features CTP4R.csv", "a", newline="") as f:
         w = csv.DictWriter(f, dict.keys())
         w.writerow(dict)
 
@@ -46,16 +46,16 @@ def format_CSV(df):
     df.insert(0, "class", column_to_move)
     column_to_move = df.pop("scan_id")
     df.insert(0, "scan_id", column_to_move)
-    column_to_move = df.pop("series")
-    df.insert(0, "series", column_to_move)
+    column_to_move = df.pop("group")
+    df.insert(0, "group", column_to_move)
 
 
-    cols = [col for col in df.columns if (col[0:9] == 'original_') | (col in ['series', 'scan_id', 'class', 'mask size'])]
+    cols = [col for col in df.columns if (col[0:9] == 'original_') | (col in ['group', 'scan_id', 'class', 'mask size'])]
     df = df[cols]
 
     df['original_firstorder_Energy'] = df['original_firstorder_Energy'] / df['mask size'] #Adjust energy feature to the size of the ROI
 
-    df.to_csv('CSVs/traditional features CRLM clean.csv', index=False)
+    df.to_csv('CSVs/traditional features CTP4R clean.csv', index=False)
 
 def extract_features():
     extractor = featureextractor.RadiomicsFeatureExtractor('settings.yaml')
@@ -73,8 +73,8 @@ def extract_features():
 
         result = extractor.execute(img, mask)
         result['scan_id'] = k
-        result['series'] = k[:4]
-        result['class'] = k[5:8]
+        result['group'] = k[0]
+        result['class'] = k[4:-4]
         result['mask size'] = seg_size
 
         if first:
@@ -83,10 +83,5 @@ def extract_features():
 
         add_row_to_CSV(result)
 
-    df = pandas.read_csv('CSVs/traditional features CRLM.csv')
+    df = pandas.read_csv('CSVs/traditional features CTP4R.csv')
     format_CSV(df)
-
-def main():
-    extract_features()
-
-main()

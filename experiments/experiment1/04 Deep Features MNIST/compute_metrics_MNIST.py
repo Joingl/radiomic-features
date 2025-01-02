@@ -93,7 +93,7 @@ def compute_combined_score(df_ICC, df_AUC):
     df_ranking.to_csv('CSVs/combined ranking.csv', index=True)
 
 def main():
-    df = pandas.read_csv('../../../feature extraction/ctp4r/04 Deep Features MNIST/CSVs/deep features CTP4R MNIST clean.csv')
+    df = pandas.read_csv('../../../feature extraction/ctp4r/CSVs/deep features CTP4R MNIST clean.csv')
     compute_ICC(df)
     compute_AUC(df)
 

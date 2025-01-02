@@ -7,10 +7,10 @@ import numpy
 import cv2
 from helper.apply_gabor_filter import apply_filter
 
-scan_path = '../../../data/crlm/01 scan numpy/'
-seg_path = '../../../data/crlm/02 seg numpy/'
+scan_path = '../../data/crlm/01 scan numpy/'
+seg_path = '../../data/crlm/02 seg numpy/'
 
-f = open('../../../data/crlm/largest_cross_sections.json')
+f = open('../../data/crlm/largest_cross_sections.json')
 largest_cs = json.load(f)
 
 pandas.set_option('display.max_rows', 1400)
@@ -97,7 +97,7 @@ def extract_features():
     format_CSV(df)
 
 def format_CSV(df):
-    templ = pandas.read_csv('../01 Traditional Features/CSVs/traditional features CRLM clean.csv')
+    templ = pandas.read_csv('CSVs/traditional features CRLM clean.csv')
     df2 = templ.iloc[:, :4]
 
     column_to_move = df.pop("mask size")
@@ -125,8 +125,3 @@ def format_CSV(df):
         df2[f'original_firstorder_Energy_idx{i}'] = df2[f'original_firstorder_Energy_idx{i}'] / df2['mask size']
 
     df2.to_csv('CSVs/gabor features CRLM clean.csv', index=False)
-
-def main():
-    extract_features()
-
-main()

@@ -2,15 +2,15 @@ import pydicom
 import numpy
 import json
 
-scan_path = '01 scan/'
-seg_path = '02 seg/'
+scan_path = 'ctp4r/01 scan/'
+seg_path = 'ctp4r/02 seg/'
 classes = ['n1', 'n2', 'c1', 'c2', 'hem', 'met']
 
 def generate_numpy_ctp4r():
-    scan_out_path = '01 scan numpy/'
-    mask_out_path = '02 seg numpy/'
+    scan_out_path = 'ctp4r/01 scan numpy/'
+    mask_out_path = 'ctp4r/02 seg numpy/'
 
-    f = open('largest_cross_sections.json')
+    f = open('ctp4r/largest_cross_sections.json')
     largest_cs = json.load(f)
 
     for k, v in largest_cs.items():

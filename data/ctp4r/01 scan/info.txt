@@ -1,1 +1,0 @@
-This directory holds the scan files from the CTP4R dataset in the original DICOM format.

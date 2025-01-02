@@ -5,6 +5,7 @@ import numpy
 tissue_classes = ['r', 't']
 tissue_classes_idx = [0, 1]
 tissue_names = ['rem', 'tum']
+types = ['traditional features CRLM', 'gabor features CRLM', 'deep features CRLM ImageNet', 'deep features CRLM MNIST']
 
 def compute_AUC_for_all_features(data, A, B):
     data.iloc[:, 2] = data.iloc[:, 2].str[0]  # renames classes to single characters
@@ -44,9 +45,12 @@ def compute_AUC_for_all_features(data, A, B):
 
     return res_list
 
-def compute_AUC(df):
+def compute_AUC(df, type):
     cols = df.columns.values
-    d = {'feature': cols[3:]}
+    if 'deep' in type:
+        d = {'feature': cols[3:]}
+    else:
+        d = {'feature': cols[4:]}
     results = pandas.DataFrame(d)
 
     for c1 in tissue_classes_idx:
@@ -55,17 +59,13 @@ def compute_AUC(df):
                 partial_res_list = compute_AUC_for_all_features(df, tissue_classes[c1], tissue_classes[c2])
                 results[f'{tissue_names[c1]} vs. {tissue_names[c2]}'] = partial_res_list
 
-    results.to_csv('CSVs/AUC discr power.csv', index=False)
+    results.to_csv(f'CSVs/{type} ranking.csv', index=False)
 
 def compute_AUC_ranking():
-    df = pandas.read_csv('CSVs/AUC discr power.csv')
-    df = df.sort_values(by='rem vs. tum', ascending=False)
-    df.to_csv('CSVs/AUC discr power.csv', index=False)
+    for type in types:
+        df = pandas.read_csv(f'CSVs/{type} clean.csv')
+        compute_AUC(df, type)
 
-
-def main():
-    df = pandas.read_csv('CSVs/deep features CRLM MNIST clean.csv')
-    compute_AUC(df)
-    compute_AUC_ranking()
-
-main()
+        df = pandas.read_csv(f'CSVs/{type} ranking.csv')
+        df = df.sort_values(by='rem vs. tum', ascending=False)
+        df.to_csv(f'CSVs/{type} ranking.csv', index=False)

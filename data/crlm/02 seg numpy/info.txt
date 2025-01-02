@@ -1,1 +1,0 @@
-This directory holds the segmentation files with the largest cross-section from the CRLM dataset in numpy format.

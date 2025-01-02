@@ -2,9 +2,6 @@ import pandas
 import numpy
 import seaborn as sns
 import matplotlib.pylab as plt
-pandas.set_option('display.max_rows', 500)
-pandas.set_option('display.max_columns', 500)
-pandas.set_option('display.width', 1000)
 
 df = pandas.read_csv('CSVs/combined ranking.csv')
 df['feature type'] = df['feature'].str[9:12]
@@ -30,5 +27,6 @@ ax.legend(title='')
 plt.plot([0.75, 0.75], [0, 1], color='tab:blue', linestyle='dashed', linewidth=1.5, alpha=0.5)
 plt.plot([0, 1], [0.8, 0.8], color='tab:blue', linestyle='dashed', linewidth=1.5, alpha=0.5)
 ax.axhspan(ymin=0.8, ymax=1, xmin=0.75, xmax=1, color='tab:blue', alpha=0.3)
+
 plt.grid()
 plt.show()

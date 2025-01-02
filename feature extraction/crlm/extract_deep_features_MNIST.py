@@ -2,6 +2,7 @@ import pandas
 import numpy
 import csv
 import json
+import os
 from PIL import Image
 import PIL
 from helper.crop_image import cropImageTo96x96
@@ -11,20 +12,20 @@ import torchvision.models as models
 from torchvision import transforms
 from torchvision.models.feature_extraction import create_feature_extractor
 
-f = open('../../../data/ctp4r/largest_cross_sections.json')
+f = open('../../data/crlm/largest_cross_sections.json')
 largest_cs = json.load(f)
 
 def write_header_to_csv(dict):
-    with open("CSVs/deep features CTP4R MNIST.csv", "w", newline="") as f:
+    with open("CSVs/deep features CRLM MNIST.csv", "w", newline="") as f:
         w = csv.DictWriter(f, dict.keys())
         w.writeheader()
 
 def add_row_to_csv(dict):
-    with open('CSVs/deep features CTP4R MNIST.csv', "a", newline="") as f:
+    with open('CSVs/deep features CRLM MNIST.csv', "a", newline="") as f:
         w = csv.DictWriter(f, dict.keys())
         w.writerow(dict)
 
-def normalize_MNIST(x): #Standard and correct way.
+def normalizeMNIST(x): #Standard and correct way IMO.
     z = (x - x.min()) / (x.max() - x.min()) * 255
     return z
 
@@ -61,8 +62,8 @@ def extract_features_MNIST(img, model):
     return res
 
 def iterate():
-    scan_path = '../../../data/ctp4r/01 scan numpy/'
-    seg_path = '../../../data/ctp4r/02 seg numpy/'
+    scan_path = '../../data/crlm/01 scan numpy/'
+    seg_path = '../../data/crlm/02 seg numpy/'
     first = True
 
     #Load model:
@@ -75,7 +76,7 @@ def iterate():
         scan = numpy.load(scan_path + k + '.npy')
         mask = numpy.load(seg_path + v + '.npy')
 
-        scan = normalize_MNIST(scan)
+        scan = normalizeMNIST(scan)
         scan = cropImageTo96x96(scan, mask)
         scan = scan.astype('float32')
 
@@ -86,8 +87,8 @@ def iterate():
 
         result = extract_features_MNIST(img, mnist_model)
         result['scan_id'] = k
-        result['group'] = k[0]
-        result['class'] = k[4:-4]
+        result['series'] = k[:4]
+        result['class'] = k[5:8]
 
         if first:
             write_header_to_csv(result)
@@ -97,23 +98,19 @@ def iterate():
 
         os.remove('tmp.tiff')
 
+
 def formatCSV(df, filename):
     column_to_move = df.pop("class")
     df.insert(0, "class", column_to_move)
     column_to_move = df.pop("scan_id")
     df.insert(0, "scan_id", column_to_move)
-    column_to_move = df.pop("group")
-    df.insert(0, "group", column_to_move)
+    column_to_move = df.pop("series")
+    df.insert(0, "series", column_to_move)
 
     df.to_csv(f'{filename} clean.csv', index=False)
 
-def main():
+def extract_features():
     iterate()
 
-    df = pandas.read_csv('CSVs/deep features CTP4R MNIST.csv')
-    formatCSV(df, 'CSVs/deep features CTP4R MNIST')
-    df = pandas.read_csv('CSVs/deep features CTP4R MNIST clean.csv')
-    print(df.shape)
-
-main()
-
+    df = pandas.read_csv('CSVs/deep features CRLM MNIST.csv')
+    formatCSV(df, 'CSVs/deep features CRLM MNIST')
