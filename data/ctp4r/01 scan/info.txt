@@ -1,0 +1,1 @@
+CTP4R scans are stored here in DICOM format.

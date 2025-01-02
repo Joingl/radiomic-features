@@ -1,0 +1,1 @@
+CTP4R segmentations are stored here in NumPy format.

@@ -1,0 +1,1 @@
+CRLM segmentations are stored here in DICOM format.
