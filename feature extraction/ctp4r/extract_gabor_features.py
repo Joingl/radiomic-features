@@ -14,10 +14,6 @@ seg_path = '../../data/ctp4r/02 seg numpy/'
 f = open('../../data/ctp4r/largest_cross_sections.json')
 largest_cs = json.load(f)
 
-pandas.set_option('display.max_rows', 1400)
-pandas.set_option('display.max_columns', 500)
-pandas.set_option('display.width', 1000)
-
 def has_more_than_one_dimension(mask):
     dim_y_greater_one = False
     dim_x_greater_one = False
