@@ -12,10 +12,6 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 numpy.set_printoptions(suppress=True)
 pandas.set_option('future.no_silent_downcasting', True)
-pandas.set_option('display.max_rows', 1400)
-pandas.set_option('display.max_columns', 500)
-pandas.set_option('display.width', 1000)
-pandas.set_option('display.float_format', lambda x: '%.4f' % x)
 
 def cosine_kernel(X, Y):
     return cosine_similarity(X, Y)
