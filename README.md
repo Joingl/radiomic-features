@@ -12,7 +12,7 @@ Download Colorectal-Liver-Metastases data from here: [CRLM](https://www.cancerim
 
 ### Directories
 The scan and segmentation data must be stored in the designated directories in this repository so the code can access them.  
-To move the scans and segmentation to their designated directories, specify the path to the downloaded data in lines 5 and 6 in the script provided [here](https://github.com/Joingl/radiomic-features/blob/main/data/move_scan_and_mask.py) and run it.  
+To move the scans and segmentation to their designated directories, specify the path to the downloaded data in lines 4 and 5 in the script provided [here](https://github.com/Joingl/radiomic-features/blob/main/data/move_scan_and_mask.py) and run it.  
 
 ### Conversion to NumPy Arrays
 Features will be extracted from NumPy arrays.  
