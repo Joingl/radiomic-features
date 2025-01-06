@@ -1,6 +1,6 @@
 # Stability & Accuracy of Radiomic Features
 
-## 1) Download and prepare Data for Feature Extraction
+## 1) Download and prepare data for Feature Extraction
 ### Download
 In a first step, the two datasets these experiments are based on must be downloaded.  
 Both datasets are publicly available on The Cancer Imaging Archive's website.
