@@ -8,10 +8,11 @@ Both datasets are publicly available on The Cancer Imaging Archive's website.
 Download CT-Phantom4Radiomics data from here: [CTP4R](https://www.cancerimagingarchive.net/collection/ct-phantom4radiomics/)  
 Download Colorectal-Liver-Metastases data from here: [CRLM](https://www.cancerimagingarchive.net/collection/colorectal-liver-metastases/)
 
+**Use the NBIA Data Retriever tool with descriptive directory names to download data from the TCIA!**
+
 ### Directories
 The scan and segmentation data must be stored in the designated directories in this repository so the code can access them.  
-A script to move the data is provided [here](https://github.com/Joingl/radiomic-features/blob/main/data/move_scan_and_mask.py).  
-Specify the paths to the stored datasets in line 5 and 6 of the script and run it.
+To move the scans and segmentation to their designated directories, specify the path to the downloaded data in lines 5 and 6 in the script provided [here](https://github.com/Joingl/radiomic-features/blob/main/data/move_scan_and_mask.py) and run it.  
 
 ### Conversion to NumPy Arrays
 Features will be extracted from NumPy arrays.  
