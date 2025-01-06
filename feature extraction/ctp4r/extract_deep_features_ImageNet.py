@@ -24,7 +24,7 @@ def add_row_to_csv(dict):
         w = csv.DictWriter(f, dict.keys())
         w.writerow(dict)
 
-def normalize_ImageNet(x): #Standard and correct way.
+def normalize_ImageNet(x):
     z = (x - x.min()) / (x.max() - x.min()) * 255
     return z
 

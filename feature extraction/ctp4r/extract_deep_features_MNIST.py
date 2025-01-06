@@ -25,7 +25,7 @@ def add_row_to_csv(dict):
         w = csv.DictWriter(f, dict.keys())
         w.writerow(dict)
 
-def normalize_MNIST(x): #Standard and correct way.
+def normalize_MNIST(x):
     z = (x - x.min()) / (x.max() - x.min()) * 255
     return z
 

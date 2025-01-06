@@ -1,8 +1,6 @@
 import pydicom
 import numpy
-#import os
 import json
-#import SimpleITK as sitk
 
 scan_path = 'crlm/01 scan/'
 seg_path = 'crlm/02 seg/'
