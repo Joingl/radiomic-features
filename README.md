@@ -8,7 +8,7 @@ Both datasets are publicly available on The Cancer Imaging Archive's website.
 Download CT-Phantom4Radiomics data from here: [CTP4R](https://www.cancerimagingarchive.net/collection/ct-phantom4radiomics/)  
 Download Colorectal-Liver-Metastases data from here: [CRLM](https://www.cancerimagingarchive.net/collection/colorectal-liver-metastases/)
 
-**Use the NBIA Data Retriever tool with descriptive directory names to download data from the TCIA!**
+**Use the TCIA's NBIA Data Retriever tool with descriptive directory names to download the data!**
 
 ### Directories
 The scan and segmentation data must be stored in the designated directories in this repository so the code can access them.  
