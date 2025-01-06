@@ -2,10 +2,6 @@ import pandas
 import seaborn as sns
 import matplotlib.pylab as plt
 
-pandas.set_option('display.max_rows', 500)
-pandas.set_option('display.max_columns', 500)
-pandas.set_option('display.width', 1000)
-
 df = pandas.read_csv('CSVs/combined ranking.csv')
 
 df['feature class'] = 'deep'
