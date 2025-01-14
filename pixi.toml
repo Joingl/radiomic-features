@@ -1,0 +1,23 @@
+[project]
+authors = ["joingl <joel.inglin@uzh.ch>"]
+channels = ["conda-forge", "pytorch","radiomics"]
+description = "Add a short description here"
+name = "radiomic-features"
+platforms = ["win-64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+pixi-pycharm = ">=0.0.8,<0.0.9"
+numpy = "1.26.4.*"
+pandas = "2.2.3.*"
+simpleitk = ">=2.4.1,<3"
+opencv = ">=4.10.0,<5"
+pillow = "11.0.0.*"
+pytorch = "2.1.2.*"
+torchvision = "0.16.2.*"
+pingouin = "0.5.5.*"
+python = "3.9.*"
+pydicom = ">=2.4.4,<3"
+pyradiomics = ">=3.1.0a2,<4"

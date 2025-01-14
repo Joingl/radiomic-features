@@ -75,25 +75,25 @@ def getMetrics(features, classifier, random_states):
         X_train = scaler.fit_transform(X_train)
         X_val = scaler.transform(X_val)
 
-        match classifier:
-            case 'LR':
-                classifier = LogisticRegression(max_iter=300, C=0.5, penalty='l2', solver='lbfgs', random_state=42)
-                model_name = 'LogReg'
-            case 'KNN':
-                classifier = KNeighborsClassifier(n_neighbors=100)
-                model_name = 'KNN'
-            case 'SVC_lin':
-                classifier = SVC(kernel='linear', C=1, probability=True, random_state=42)
-                model_name = 'SVC_lin'
-            case 'SVC_cos':
-                classifier = SVC(kernel=cosine_kernel, C=1, probability=True, random_state=42)
-                model_name = 'SVC_cos'
-            case 'RF':
-                classifier = RandomForestClassifier(n_estimators=100, max_depth=3, criterion='gini', random_state=42)
-                model_name = 'RF'
-            case 'Ada':
-                classifier = AdaBoostClassifier(n_estimators=100, learning_rate=0.5, algorithm='SAMME', random_state=42) # [*]
-                model_name = 'Ada'
+
+        if classifier == 'LR':
+            classifier = LogisticRegression(max_iter=300, C=0.5, penalty='l2', solver='lbfgs', random_state=42)
+            model_name = 'LogReg'
+        elif classifier == 'KNN':
+            classifier = KNeighborsClassifier(n_neighbors=100)
+            model_name = 'KNN'
+        elif classifier == 'SVC_lin':
+            classifier = SVC(kernel='linear', C=1, probability=True, random_state=42)
+            model_name = 'SVC_lin'
+        elif classifier == 'SVC_cos':
+            classifier = SVC(kernel=cosine_kernel, C=1, probability=True, random_state=42)
+            model_name = 'SVC_cos'
+        elif classifier == 'RF':
+            classifier = RandomForestClassifier(n_estimators=100, max_depth=3, criterion='gini', random_state=42)
+            model_name = 'RF'
+        elif classifier == 'Ada':
+            classifier = AdaBoostClassifier(n_estimators=100, learning_rate=0.5, algorithm='SAMME', random_state=42) # [*]
+            model_name = 'Ada'
 
 
         classifier.fit(X_train, y_train)

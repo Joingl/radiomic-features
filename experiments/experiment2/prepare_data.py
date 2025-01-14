@@ -1,4 +1,5 @@
 import pandas
+
 columns = ['group', 'scan_id', 'class']
 
 def join_CTP4R_data():
