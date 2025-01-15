@@ -1,4 +1,9 @@
 # Stability & Accuracy of Radiomic Features
+## Installation with Pixi (PyCharm on Windows)
+1) Make sure to have a working installation of [Pixi](https://pixi.sh/latest/).
+2) Using the terminal, navigate to the project directory.
+3) Run ```pixi install``` to install the dependencies.
+4) In PyCharm add a Python interpreter by selecting **Conda Environment** and using the existing environment stored in ```.pixi\envs\default\libexec\conda.bat``` as the **Conda Executable**.
 
 ## 1) Download and prepare data for Feature Extraction
 ### Download
