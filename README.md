@@ -23,7 +23,9 @@ In step 2 all feature types are extracted from the NumPy arrays. Feature extract
 To extract features from the CTP4R data run the script provided [here](https://github.com/Joingl/radiomic-features/blob/main/feature%20extraction/ctp4r/extract_features_ctp4r.py)   
 To extract features from the CRLM data run the script provided [here](https://github.com/Joingl/radiomic-features/blob/main/feature%20extraction/crlm/extract_features_crlm.py)  
 
-**For Gabor feature extraction you need to have a working version of the pytorch gabor library installed.**
+**For Gabor feature extraction you need to have a working version of the pytorch gabor library installed.**  
+The pytorch gabor library is not publicly available at the moment. For that reason Gabor feature extraction is disabled.
+Pre-computed results will be used for experiments.
 
 ## 3) Experiment 1
 In experiment 1 stability and discriminative power are measured and features are ranked considering both characteristics.  
